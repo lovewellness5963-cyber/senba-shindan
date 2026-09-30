@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教える人から、選ばれる専門家診断 | 深山ゆかり Official</title>
+<meta name="description" content="5つの質問で、あなたが「選ばれる専門家」になるために今いちばん向き合うべきテーマがわかります。">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E6;
+    --paper-deep:#EFE7D6;
+    --ink:#37291F;
+    --ink-soft:#5C4C3D;
+    --terracotta:#C1694A;
+    --terracotta-deep:#A85338;
+    --gold:#AC8347;
+    --teal:#24413C;
+    --line:rgba(55,41,31,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; background:var(--paper); color:var(--ink);
+    font-family:'Zen Kaku Gothic New', sans-serif; line-height:1.85;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  h1,h2,h3{font-family:'Shippori Mincho', serif; font-weight:600; margin:0;}
+  .eyebrow{font-family:'EB Garamond', serif; font-style:italic; letter-spacing:0.12em; font-size:12.5px; color:var(--terracotta-deep); text-transform:uppercase;}
+  .card{
+    width:100%; max-width:560px; background:var(--paper); border:1px solid var(--line);
+    padding:44px 34px; position:relative; overflow:hidden;
+  }
+  @media(max-width:480px){.card{padding:34px 22px;}}
+
+  .ripple{position:absolute; right:-70px; top:-70px; width:220px; height:220px; pointer-events:none; z-index:0;}
+  .ripple circle{fill:none; stroke:var(--terracotta); opacity:0.14;}
+
+  .screen{position:relative; z-index:1;}
+  .hidden{display:none;}
+
+  /* start screen */
+  .start h1{font-size:clamp(22px,5vw,28px); line-height:1.6; margin:14px 0 18px;}
+  .start p.lead{font-size:14.5px; color:var(--ink-soft); margin-bottom:28px;}
+  .start-meta{font-size:12.5px; color:var(--ink-soft); margin-bottom:28px;}
+
+  .btn{
+    display:inline-block; width:100%; text-align:center; padding:15px 20px;
+    background:var(--terracotta); color:#fff; text-decoration:none; border:none;
+    font-family:inherit; font-size:14.5px; letter-spacing:0.02em; cursor:pointer; transition:0.2s;
+  }
+  .btn:hover{background:var(--terracotta-deep);}
+  .btn-ghost{background:transparent; border:1px solid var(--ink); color:var(--ink); margin-top:12px;}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+
+  /* progress */
+  .progress-row{display:flex; align-items:center; gap:12px; margin-bottom:28px;}
+  .progress-track{flex:1; height:3px; background:var(--line); position:relative;}
+  .progress-fill{height:100%; background:var(--terracotta); width:0%; transition:width 0.3s;}
+  .progress-label{font-family:'EB Garamond',serif; font-style:italic; font-size:13px; color:var(--terracotta-deep); white-space:nowrap;}
+
+  .q-text{font-size:17px; margin-bottom:24px; line-height:1.8;}
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .option{
+    text-align:left; padding:14px 16px; border:1px solid var(--line); background:var(--paper);
+    font-family:inherit; font-size:14px; color:var(--ink-soft); cursor:pointer; transition:0.15s;
+  }
+  .option:hover{border-color:var(--terracotta); color:var(--ink); background:var(--paper-deep);}
+
+  .back-link{display:inline-block; margin-top:20px; font-size:12.5px; color:var(--ink-soft); text-decoration:underline; text-underline-offset:3px; cursor:pointer; background:none; border:none; font-family:inherit; padding:0;}
+
+  /* result screen */
+  .result-eyebrow{color:var(--terracotta-deep);}
+  .result h2{font-size:clamp(20px,4.5vw,26px); margin:12px 0 16px; line-height:1.6;}
+  .result-desc{font-size:14.5px; color:var(--ink-soft); margin-bottom:28px;}
+  .book-box{border:1px solid var(--line); background:var(--paper-deep); padding:22px 20px; margin-bottom:24px;}
+  .book-label{font-size:12px; color:var(--terracotta-deep); letter-spacing:0.04em; margin-bottom:8px;}
+  .book-title{font-size:16.5px; margin-bottom:6px; font-family:'Shippori Mincho',serif;}
+  .book-sub{font-size:13px; color:var(--ink-soft); margin-bottom:16px;}
+  .retry{margin-top:16px; text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <svg class="ripple" viewBox="0 0 220 220"><circle cx="110" cy="110" r="40"/><circle cx="110" cy="110" r="70"/><circle cx="110" cy="110" r="100"/></svg>
+
+  <!-- START -->
+  <div class="screen start" id="screen-start">
+    <p class="eyebrow">Yukari Miyama Official</p>
+    <h1>教える人から、<br>選ばれる専門家診断</h1>
+    <p class="lead">技術や資格はあるのに、なぜか選ばれない。5つの質問で、あなたが今いちばん向き合うべきテーマと、次に読むべき一冊がわかります。</p>
+    <p class="start-meta">全5問／約2分</p>
+    <button class="btn" onclick="startQuiz()">診断をはじめる</button>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="screen hidden" id="screen-quiz">
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-label" id="progressLabel">Q1 / 5</span>
+    </div>
+    <p class="q-text" id="qText"></p>
+    <div class="options" id="qOptions"></div>
+    <button class="back-link hidden" id="backBtn" onclick="goBack()">← 前の質問に戻る</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen hidden result" id="screen-result">
+    <p class="eyebrow result-eyebrow" id="resultEyebrow"></p>
+    <h2 id="resultTitle"></h2>
+    <p class="result-desc" id="resultDesc"></p>
+    <div class="book-box">
+      <p class="book-label">あなたに今いちばん効く一冊</p>
+      <p class="book-title" id="bookTitle"></p>
+      <p class="book-sub" id="bookSub"></p>
+      <a class="btn" id="bookLink" href="#" target="_blank" rel="noopener">Amazonで見る →</a>
+    </div>
+    <a class="btn btn-ghost" id="consultLink" href="https://my37p.com/p/r/01PGToN6" target="_blank" rel="noopener">個別コンサルを相談する</a>
+    <p class="retry"><button class="back-link" onclick="restartQuiz()">もう一度診断する</button></p>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    text: "自分の指導料を人に聞かれたとき、正直な気持ちに近いのは？",
+    options: [
+      { label: "高いと思われたらどうしよう、と身構える", type: "money" },
+      { label: "相場と比べてこれくらいが妥当だろうと考える", type: "price" },
+      { label: "説明すれば納得してもらえる自信がある", type: "branding" },
+      { label: "決められた金額をそのまま伝えるだけ", type: "employed" }
+    ]
+  },
+  {
+    text: "SNSやプロフィールで自分の強みを聞かれたら？",
+    options: [
+      { label: "資格や講座名は言えるが、強みと言われると詰まる", type: "branding" },
+      { label: "本当は分かっているが、言葉にすると安っぽく感じる", type: "money" },
+      { label: "誰にでも当てはまるような言葉になってしまう", type: "price" },
+      { label: "特に意識したことがない、頼まれたことをこなしている", type: "employed" }
+    ]
+  },
+  {
+    text: "値上げを考えたときに、まず浮かぶ気持ちは？",
+    options: [
+      { label: "お客様が離れるのが怖い", type: "money" },
+      { label: "今の内容でその金額を取っていいのか分からない", type: "branding" },
+      { label: "いくらが妥当なのか、相場が分からない", type: "price" },
+      { label: "雇われ先や周りが決めることだから、自分では決められない", type: "employed" }
+    ]
+  },
+  {
+    text: "理想の働き方について聞かれたら、まず浮かぶのは？",
+    options: [
+      { label: "今の収入への制限を外して、もっと増やしたい", type: "money" },
+      { label: "自分にしかできない仕事だけをしていきたい", type: "branding" },
+      { label: "今より高い金額でも納得してもらえる関係を築きたい", type: "price" },
+      { label: "誰かの判断を待たず、自分で決めて動きたい", type: "employed" }
+    ]
+  },
+  {
+    text: "「身体が楽になった、ありがとう」「先生の教え方がわかりやすい」「先生と合うと元気になる、レッスンが楽しい」「先生に聞くのが一番早い」——こんな言葉をもらうことは多いのに、心の中でふとよぎるのは？",
+    options: [
+      { label: "こんなに感謝してもらえるのに、この金額のままでいいのかな", type: "money" },
+      { label: "感謝はされるけど、この価格の理由をうまく説明できていない気がする", type: "branding" },
+      { label: "感謝されるたびに、正直これぐらいの価格じゃもったいない気もする", type: "price" },
+      { label: "感謝されるのは嬉しいけど、結局は日々の依頼をこなしているだけな気もする", type: "employed" }
+    ]
+  }
+];
+
+const results = {
+  money: {
+    eyebrow: "Type: Money Mindset",
+    title: "お金のマインドブロックタイプ",
+    desc: "技術や実績は十分あるのに、「もらいすぎでは」という感覚が、価格を決める場面で無意識にブレーキをかけているタイプです。まず向き合うべきは商品設計より先に、お金そのものへの思い込みです。",
+    book: {
+      title: "値上げが怖い本当の正体",
+      sub: "低単価から抜け出す値付けの教科書",
+      url: "https://amzn.asia/d/01FDFrT9"
+    }
+  },
+  price: {
+    eyebrow: "Type: Pricing",
+    title: "価格設定タイプ",
+    desc: "「妥当な金額」の基準がまだ自分の中にできていないタイプです。相場に合わせるのではなく、自分が提供している価値から価格を組み立て直すことが次の一歩になります。",
+    book: {
+      title: "値上げをしたらファンが増えた",
+      sub: "フィットネス系フリーランスのための収入の増やし方",
+      url: "https://amzn.asia/d/08EF7yGg"
+    }
+  },
+  branding: {
+    eyebrow: "Type: Branding",
+    title: "強み未言語化タイプ",
+    desc: "強みそのものはすでに持っているのに、それを人に伝わる言葉にできていないタイプです。資格や経験を「誰にとっての、どんな価値か」に翻訳することが、選ばれる第一歩になります。",
+    book: {
+      title: "自分にしか出ないOnlyOne商品のつくり方",
+      sub: "フィットネス系フリーランスのための商品設計術",
+      url: "https://amzn.asia/d/0hbUR9sO"
+    }
+  },
+  employed: {
+    eyebrow: "Type: Employed Mindset",
+    title: "雇われ脳タイプ",
+    desc: "「決められたことをこなす」働き方が長く、自分で決めて動く感覚がまだ育ちきっていないタイプです。今のキャリアを土台に、自分で選び取る働き方へ切り替えるタイミングです。",
+    book: {
+      title: "値上げをしたらファンが増えた",
+      sub: "フィットネス系フリーランスのための40代からの戦略的リブランディング",
+      url: "https://amzn.asia/d/0fEdEfcG"
+    }
+  }
+};
+
+let currentQ = 0;
+let answers = [];
+
+function startQuiz(){
+  document.getElementById('screen-start').classList.add('hidden');
+  document.getElementById('screen-quiz').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = questions[currentQ];
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('progressLabel').textContent = `Q${currentQ+1} / ${questions.length}`;
+  document.getElementById('progressFill').style.width = ((currentQ)/questions.length*100) + '%';
+  const optWrap = document.getElementById('qOptions');
+  optWrap.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt.label;
+    btn.onclick = () => selectAnswer(opt.type);
+    optWrap.appendChild(btn);
+  });
+  document.getElementById('backBtn').classList.toggle('hidden', currentQ === 0);
+}
+
+function selectAnswer(type){
+  answers[currentQ] = type;
+  if (currentQ < questions.length - 1){
+    currentQ++;
+    renderQuestion();
+  } else {
+    document.getElementById('progressFill').style.width = '100%';
+    showResult();
+  }
+}
+
+function goBack(){
+  if (currentQ > 0){
+    currentQ--;
+    renderQuestion();
+  }
+}
+
+function showResult(){
+  const counts = {};
+  answers.forEach(t => counts[t] = (counts[t]||0) + 1);
+  let topType = 'money', topCount = -1;
+  Object.keys(counts).forEach(t => {
+    if (counts[t] > topCount){ topCount = counts[t]; topType = t; }
+  });
+  const r = results[topType];
+
+  document.getElementById('screen-quiz').classList.add('hidden');
+  document.getElementById('screen-result').classList.remove('hidden');
+  document.getElementById('resultEyebrow').textContent = r.eyebrow;
+  document.getElementById('resultTitle').textContent = r.title;
+  document.getElementById('resultDesc').textContent = r.desc;
+  document.getElementById('bookTitle').textContent = r.book.title;
+  document.getElementById('bookSub').textContent = r.book.sub;
+  document.getElementById('bookLink').href = r.book.url;
+}
+
+function restartQuiz(){
+  currentQ = 0;
+  answers = [];
+  document.getElementById('screen-result').classList.add('hidden');
+  document.getElementById('screen-start').classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
